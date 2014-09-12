@@ -13,3 +13,7 @@ Usage 1(v0.1): uart clk
 Usage 2(v0.2): nor flash
 	> loady 32000000
 	> go 32000000
+
+Usage 3(v0.3): dm9k is work
+	> loady 32000000
+	> go 32000000
