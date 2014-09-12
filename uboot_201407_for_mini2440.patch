@@ -87,7 +87,7 @@ diff -aurNp u-boot-2014.07/arch/arm/cpu/arm920t/start.S u-boot-2014.07_ok/arch/a
  	/*
 diff -aurNp u-boot-2014.07/board/samsung/mini2440/lowlevel_init.S u-boot-2014.07_ok/board/samsung/mini2440/lowlevel_init.S
 --- u-boot-2014.07/board/samsung/mini2440/lowlevel_init.S	1970-01-01 08:00:00.000000000 +0800
-+++ u-boot-2014.07_ok/board/samsung/mini2440/lowlevel_init.S	2014-09-10 05:45:56.000000000 +0800
++++ u-boot-2014.07_ok/board/samsung/mini2440/lowlevel_init.S	2014-09-10 07:45:22.000000000 +0800
 @@ -0,0 +1,148 @@
 +/*
 + * Memory Setup stuff - taken from blob memsetup.S
@@ -224,19 +224,19 @@ diff -aurNp u-boot-2014.07/board/samsung/mini2440/lowlevel_init.S u-boot-2014.07
 +/* the literal pools origin */
 +
 +SMRDATA:
-+    .word (0+(B1_BWSCON<<4)+(B2_BWSCON<<8)+(B3_BWSCON<<12)+(B4_BWSCON<<16)+(B5_BWSCON<<20)+(B6_BWSCON<<24)+(B7_BWSCON<<28))
-+    .word ((B0_Tacs<<13)+(B0_Tcos<<11)+(B0_Tacc<<8)+(B0_Tcoh<<6)+(B0_Tah<<4)+(B0_Tacp<<2)+(B0_PMC))
-+    .word ((B1_Tacs<<13)+(B1_Tcos<<11)+(B1_Tacc<<8)+(B1_Tcoh<<6)+(B1_Tah<<4)+(B1_Tacp<<2)+(B1_PMC))
-+    .word ((B2_Tacs<<13)+(B2_Tcos<<11)+(B2_Tacc<<8)+(B2_Tcoh<<6)+(B2_Tah<<4)+(B2_Tacp<<2)+(B2_PMC))
-+    .word ((B3_Tacs<<13)+(B3_Tcos<<11)+(B3_Tacc<<8)+(B3_Tcoh<<6)+(B3_Tah<<4)+(B3_Tacp<<2)+(B3_PMC))
-+    .word ((B4_Tacs<<13)+(B4_Tcos<<11)+(B4_Tacc<<8)+(B4_Tcoh<<6)+(B4_Tah<<4)+(B4_Tacp<<2)+(B4_PMC))
-+    .word ((B5_Tacs<<13)+(B5_Tcos<<11)+(B5_Tacc<<8)+(B5_Tcoh<<6)+(B5_Tah<<4)+(B5_Tacp<<2)+(B5_PMC))
-+    .word ((B6_MT<<15)+(B6_Trcd<<2)+(B6_SCAN))
-+    .word ((B7_MT<<15)+(B7_Trcd<<2)+(B7_SCAN))
-+    .word ((REFEN<<23)+(TREFMD<<22)+(Trp<<20)+(Trc<<18)+(Tchr<<16)+REFCNT)
-+    .word 0x32
-+    .word 0x30
-+    .word 0x30
++   	.long 0x22011110     //BWSCON
++	.long 0x00000700     //BANKCON0
++	.long 0x00000700     //BANKCON1
++	.long 0x00000700     //BANKCON2
++	.long 0x00000700     //BANKCON3  
++	.long 0x00000740     //BANKCON4
++	.long 0x00000700     //BANKCON5
++	.long 0x00018005     //BANKCON6
++	.long 0x00018005     //BANKCON7
++	.long 0x008C04F4     //REFRESH
++	.long 0x000000B1     //BANKSIZE
++	.long 0x00000030     //MRSRB6
++	.long 0x00000030     //MRSRB7
 diff -aurNp u-boot-2014.07/board/samsung/mini2440/Makefile u-boot-2014.07_ok/board/samsung/mini2440/Makefile
 --- u-boot-2014.07/board/samsung/mini2440/Makefile	1970-01-01 08:00:00.000000000 +0800
 +++ u-boot-2014.07_ok/board/samsung/mini2440/Makefile	2014-09-10 05:46:08.000000000 +0800
@@ -635,7 +635,7 @@ diff -aurNp u-boot-2014.07/drivers/net/dm9000x.c u-boot-2014.07_ok/drivers/net/d
  /*
 diff -aurNp u-boot-2014.07/include/configs/mini2440.h u-boot-2014.07_ok/include/configs/mini2440.h
 --- u-boot-2014.07/include/configs/mini2440.h	1970-01-01 08:00:00.000000000 +0800
-+++ u-boot-2014.07_ok/include/configs/mini2440.h	2014-09-10 07:30:36.000000000 +0800
++++ u-boot-2014.07_ok/include/configs/mini2440.h	2014-09-10 07:43:45.000000000 +0800
 @@ -0,0 +1,147 @@
 +/*
 + * (C) Copyright 2002
@@ -663,9 +663,9 @@ diff -aurNp u-boot-2014.07/include/configs/mini2440.h u-boot-2014.07_ok/include/
 +#define CONFIG_S3C2440		/* specifically a SAMSUNG S3C2410 SoC */
 +#define CONFIG_SMDK2410		/* on a SAMSUNG SMDK2410 Board */
 +
-+#define CONFIG_SKIP_LOWLEVEL_INIT
++//#define CONFIG_SKIP_LOWLEVEL_INIT
 +
-+#define CONFIG_SYS_TEXT_BASE	0x32000000
++#define CONFIG_SYS_TEXT_BASE	0x0
 +
 +#define CONFIG_SYS_ARM_CACHE_WRITETHROUGH
 +
