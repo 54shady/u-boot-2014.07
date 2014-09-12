@@ -31,3 +31,11 @@ Usage 5(v0.5): nor boot support, no longer boot form sdram,
 	> protect off all
 	> erase 0 3ffff
 	> cp.b 32000000 0 40000
+
+Usage 6(v0.6): save env in nand flash and make a partition
+	> loady 32000000
+	> protect off all
+	> erase 0 3ffff
+	> cp.b 32000000 0 40000
+	> save
+	> mtd

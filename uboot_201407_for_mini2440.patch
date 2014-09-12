@@ -635,8 +635,8 @@ diff -aurNp u-boot-2014.07/drivers/net/dm9000x.c u-boot-2014.07_ok/drivers/net/d
  /*
 diff -aurNp u-boot-2014.07/include/configs/mini2440.h u-boot-2014.07_ok/include/configs/mini2440.h
 --- u-boot-2014.07/include/configs/mini2440.h	1970-01-01 08:00:00.000000000 +0800
-+++ u-boot-2014.07_ok/include/configs/mini2440.h	2014-09-10 07:43:45.000000000 +0800
-@@ -0,0 +1,147 @@
++++ u-boot-2014.07_ok/include/configs/mini2440.h	2014-09-10 08:04:14.000000000 +0800
+@@ -0,0 +1,157 @@
 +/*
 + * (C) Copyright 2002
 + * Sysgo Real-Time Solutions, GmbH <www.elinos.com>
@@ -729,6 +729,8 @@ diff -aurNp u-boot-2014.07/include/configs/mini2440.h u-boot-2014.07_ok/include/
 +#define CONFIG_SYS_LOAD_ADDR		0x30800000
 +
 +/*-----------------------------------------------------------------------
++#define CONFIG_BOOTARGS "console=ttySAC0,115200 root=/dev/mtdblock3 init=/linuxrc"
++#define CONFIG_BOOTCOMMAND "nand read 30000000 kernel ; bootm 30000000"
 + * Physical Memory Map
 + */
 +#define CONFIG_NR_DRAM_BANKS	1          /* we have 1 bank of DRAM */
@@ -753,10 +755,18 @@ diff -aurNp u-boot-2014.07/include/configs/mini2440.h u-boot-2014.07_ok/include/
 +#define CONFIG_SYS_FLASH_BANKS_LIST     { CONFIG_SYS_FLASH_BASE }
 +#define CONFIG_SYS_MAX_FLASH_SECT	(256)
 +
-+#define CONFIG_ENV_ADDR (CONFIG_SYS_FLASH_BASE + 0x070000)
-+#define CONFIG_ENV_IS_IN_FLASH
-+#define CONFIG_ENV_SIZE 0x10000
++#define CONFIG_ENV_IS_IN_NAND
++#define CONFIG_ENV_OFFSET		0x40000
++#define CONFIG_ENV_SIZE			0x20000
 +
++/* mtd */
++#define CONFIG_CMD_MTDPARTS
++#define CONFIG_MTD_DEVICE
++#define MTDIDS_DEFAULT		"nand0=mini2440-0"
++#define MTDPARTS_DEFAULT 	"mtdparts=mini2440-0:256k(u-boot),"	\
++							"128k(params),"	\
++							"2m(kernel),"	\
++							"-(rootfs)"		\
 +/*
 + * Size of malloc() pool
 + * BZIP2 / LZO / LZMA need a lot of RAM
