@@ -39,3 +39,8 @@ Usage 6(v0.6): save env in nand flash and make a partition
 	> cp.b 32000000 0 40000
 	> save
 	> mtd
+
+Usage 7(v0.7): boot from nand flash support,"delete the vecotr in u-boot.lds"
+	> loady 32000000
+	> nand erase 0 40000
+	> nand write 32000000 0 40000
