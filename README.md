@@ -44,3 +44,5 @@ Usage 7(v0.7): boot from nand flash support,"delete the vecotr in u-boot.lds"
 	> loady 32000000
 	> nand erase 0 40000
 	> nand write 32000000 0 40000
+
+Usage 8(v0.8): yaffs2 file system support,but not test fully yet!!
